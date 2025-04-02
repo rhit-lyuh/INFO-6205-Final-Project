@@ -34,6 +34,6 @@ SmartDietPlanner/
 │           └── smartdietplanner.view/
 ├── README.md
 ```
-
+## Team
 Developed by Team ArkNights
 Team members: Yun Xu, Haodong Lyu, Bohao Li
