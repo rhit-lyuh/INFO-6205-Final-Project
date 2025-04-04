@@ -44,3 +44,8 @@ public class Main extends Application {
 //Delete module-info.java file
 //In “(x) = Arguments” tab -> VM arguments, type in following arguments:
 //--add-modules javafx.controls,javafx.fxml
+
+
+//warning: in the working copy of 'src/application/Main.fxml', LF will be replaced by CRLF the next time Git touches it 
+//Diff from Win and Mac
+//$ git config --global core.autocrlf true
