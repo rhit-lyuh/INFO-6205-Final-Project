@@ -47,5 +47,5 @@ public class Main extends Application {
 
 
 //warning: in the working copy of 'src/application/Main.fxml', LF will be replaced by CRLF the next time Git touches it 
-//Diff from Win and Mac
-//$ git config --global core.autocrlf true
+//Diff from Win and Mac (keep on Win)
+//git config --global core.autocrlf input
