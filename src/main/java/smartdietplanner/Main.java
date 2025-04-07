@@ -15,8 +15,10 @@ import javafx.scene.Parent;
 
 //DONOT MODIFY THESE SETTING
 //Use Javafx plugin in the Eclipse marketplace
-//Min width: 400
-//Min height: 300
+//Min width: 1000
+//Min height: 700
+//<Image url="@../../../images/Logo-SDP.png" />
+
 public class Main extends Application {
 
     @Override
