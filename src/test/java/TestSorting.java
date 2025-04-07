@@ -1,5 +1,3 @@
-package smartdietplanner.service;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -7,8 +5,10 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import smartdietplanner.model.Food;
+import smartdietplanner.service.Sorter;
 
-class TestForSorter {
+public class TestSorting {
+
 	@Test
 	public void testSortByName() {
 		ArrayList<Food> foodList = new ArrayList<>();

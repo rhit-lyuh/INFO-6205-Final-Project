@@ -27,11 +27,11 @@ public class MealPlan {
      * @param food the Food object to add
      */
     public void addFood(Food food) {
-        meals.add(food);
-        totalCalories += food.getCalories();
-        totalProtein += food.getProtein();
-        totalCarbs += food.getCarbs();
-        totalFat += food.getFat();
+    	this.meals.add(food);
+        this.totalCalories += Math.round( food.getCalories()*100)/100;
+        this.totalProtein += Math.round( food.getProtein()*100)/100;
+        this.totalCarbs += Math.round( food.getCarbs()*100)/100;
+        this.totalFat += Math.round( food.getFat()*100)/100;
     }
 
     /**
@@ -40,17 +40,17 @@ public class MealPlan {
      * @param food the Food object to remove
      */
     public void removeFood(Food food) {
-        if(meals.remove(food)) {
-            totalCalories -= food.getCalories();
-            totalProtein -= food.getProtein();
-            totalCarbs -= food.getCarbs();
-            totalFat -= food.getFat();
+        if(this.meals.remove(food)) {
+        	this.totalCalories -=Math.round( food.getCalories()*100)/100;
+        	this.totalProtein -= Math.round( food.getProtein()*100)/100;
+        	this.totalCarbs -= Math.round( food.getCarbs()*100)/100;
+        	this.totalFat -= Math.round( food.getFat()*100)/100;
         }
     }
 
     //Getter and Setter
     public List<Food> getMeals() {
-        return meals;
+        return this.meals;
     }
 
     public void setMeals(List<Food> meals) {
@@ -58,7 +58,7 @@ public class MealPlan {
     }
 
     public double getTotalCalories() {
-        return totalCalories;
+        return  this.totalCalories;
     }
 
     public void setTotalCalories(double totalCalories) {
@@ -66,7 +66,7 @@ public class MealPlan {
     }
 
     public double getTotalProtein() {
-        return totalProtein;
+        return this.totalProtein;
     }
 
     public void setTotalProtein(double totalProtein) {
@@ -74,7 +74,7 @@ public class MealPlan {
     }
 
     public double getTotalCarbs() {
-        return totalCarbs;
+        return this.totalCarbs;
     }
 
     public void setTotalCarbs(double totalCarbs) {
@@ -82,7 +82,7 @@ public class MealPlan {
     }
 
     public double getTotalFat() {
-        return totalFat;
+        return this.totalFat;
     }
 
     public void setTotalFat(double totalFat) {

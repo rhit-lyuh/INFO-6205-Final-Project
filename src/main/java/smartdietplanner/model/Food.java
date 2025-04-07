@@ -26,7 +26,7 @@ public class Food {
     }
 
     public double getCalories() {
-        return calories;
+        return this.calories;
     }
 
     public void setCalories(double calories) {
@@ -34,7 +34,7 @@ public class Food {
     }
 
     public double getProtein() {
-        return protein;
+        return this.protein;
     }
 
     public void setProtein(double protein) {
@@ -42,7 +42,7 @@ public class Food {
     }
 
     public double getCarbs() {
-        return carbs;
+        return this.carbs;
     }
 
     public void setCarbs(double carbs) {
@@ -50,7 +50,7 @@ public class Food {
     }
 
     public double getFat() {
-        return fat;
+        return this.fat;
     }
 
     public void setFat(double fat) {
