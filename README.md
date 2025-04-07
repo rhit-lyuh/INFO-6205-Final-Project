@@ -1,6 +1,7 @@
 # SmartDietPlanner
 
-SmartDietPlanner is a JavaFX-based desktop application designed to help users plan their meals based on nutritional goals.
+SmartDietPlanner is a JavaFX-based desktop application designed to help users plan their meals based on nutritional goals. This project is developed as a final group project for the INFO-6205 course.
+
 
 ## Features
 - Input daily food and nutrition intake
@@ -34,6 +35,8 @@ SmartDietPlanner/
 │           └── smartdietplanner.view/
 ├── README.md
 ```
+
 ## Team
 Developed by Team ArkNights  
 Team members: Yun Xu, Haodong Lyu, Bohao Li
+
