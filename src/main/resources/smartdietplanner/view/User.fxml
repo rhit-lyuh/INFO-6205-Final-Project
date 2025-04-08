@@ -12,7 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="1000.0" 
+xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="smartdietplanner.controller.UserController">
    <children>
       <ImageView fitHeight="104.0" fitWidth="92.0" layoutX="327.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-radius: 50%; -fx-clip: radius(50%);">
          <image>

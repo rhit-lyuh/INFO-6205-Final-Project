@@ -15,8 +15,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="1000.0" 
-			xmlns="http://javafx.com/javafx/23.0.1" 
-			xmlns:fx="http://javafx.com/fxml/1"
+			xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" 
 			fx:controller="smartdietplanner.controller.GoalController">
    <children>
       <ImageView fitHeight="97.0" fitWidth="402.0" layoutX="299.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
@@ -103,9 +102,9 @@
          <items>
             <HBox alignment="CENTER" prefHeight="0.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Label fx:id="HomeAlert" onMouseClicked="#handleToHome" text="Home" />
-                  <Label fx:id="DashboardAlert" onMouseClicked="#handleToDashboard" text="Dashboard" />
-                  <Button fx:id="UserAlert" mnemonicParsing="false" onMouseClicked="#handleToUser" text="User" />
+                  <Label fx:id="HomeNav" onMouseClicked="#handleToHome" text="Home" />
+                  <Label fx:id="DashboardNav" onMouseClicked="#handleToDashboard" text="Dashboard" />
+                  <Button fx:id="UserNav" mnemonicParsing="false" onAction="#handleToUser" text="User" />
                </children>
             </HBox>
          </items>

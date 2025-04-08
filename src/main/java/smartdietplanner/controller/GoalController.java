@@ -31,13 +31,57 @@ public class GoalController {
 	
     //Bar
 	@FXML
-	private Label HomeAlert;
+	private Label HomeNav;
 	@FXML
-	private Label DashboardAlert;
+	private Label DashboardNav;
 	@FXML
-	private Button UserAlert;
+	private Button UserNav;
 	
-    //alert
+    
+  	
+
+	
+	
+	//Bar
+	@FXML
+    public void handleToHome() {
+        showAlert("Alert", "This is Home Page.");
+        System.out.println("clicked");
+    }
+	@FXML
+    public void handleToDashboard() {
+	    try {
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/Dashboard.fxml"));
+	        Parent loginPage = loader.load();
+
+	        Stage stage = (Stage) DashboardNav.getScene().getWindow();
+	        stage.setScene(new Scene(loginPage));
+	        stage.setTitle("Dashboard");
+	        stage.show();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        showAlert("Fail to open.", "CANNOT load the Dashboard page.");
+	    }
+    }
+	
+	@FXML
+    public void handleToUser() {
+	    try {
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/User.fxml"));
+	        Parent loginPage = loader.load();
+
+	        Stage stage = (Stage) DashboardNav.getScene().getWindow();
+	        stage.setScene(new Scene(loginPage));
+	        stage.setTitle("User");
+	        stage.show();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        showAlert("Fail to open.", "CANNOT load the User page.");
+	    }
+    }
+
+	
+	//alert
   	private void showAlert(String title, String UserNameMsg) {
   		Alert alert = new Alert(AlertType.ERROR);
   	       alert.setTitle(title);
@@ -45,29 +89,6 @@ public class GoalController {
   	       alert.setContentText(UserNameMsg);
   	       alert.showAndWait(); 
   	}
-  	
-//	Bar
-	@FXML
-    public void handleToHome() {
-        showLoginAlert();
-        System.out.println("clicked");
-    }
-	@FXML
-    public void handleToDashboard() {
-        showLoginAlert();
-    }
-	
-	@FXML
-    public void handleToUser() {
-		showLoginAlert();
-    }
-	private void showLoginAlert() {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Alert");
-        alert.setHeaderText(null);
-        alert.setContentText("Plz login or register in ur account.");
-        alert.showAndWait();
-    }
 	
 }
 
