@@ -149,11 +149,11 @@ public class MainController {
             
             Stage stage = (Stage) UserNameLogin.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("Index");
+            stage.setTitle("Goal");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert("Fail.", "CANNOT load the index page.");
+            showAlert("Fail.", "CANNOT load the goal page.");
         }
     }
 	
