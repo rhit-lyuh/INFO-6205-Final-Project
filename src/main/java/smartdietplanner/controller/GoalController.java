@@ -36,6 +36,9 @@ public class GoalController {
 	private Label DashboardNav;
 	@FXML
 	private Button UserNav;
+	@FXML
+	private Button FoodNav;
+
 	
     
   	
@@ -79,6 +82,24 @@ public class GoalController {
 	        showAlert("Fail to open.", "CANNOT load the User page.");
 	    }
     }
+	
+	
+	@FXML
+	public void handleToFood() {
+	    try {
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/Foodlist.fxml"));
+	        Parent foodListPage = loader.load();
+
+	        Stage stage = (Stage) FoodNav.getScene().getWindow();
+	        stage.setScene(new Scene(foodListPage));
+	        stage.setTitle("Food List");
+	        stage.show();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        showAlert("Failed to open", "Unable to load the Food List page.");
+	    }
+	}
+
 
 	
 	//alert
