@@ -69,12 +69,12 @@ public class GoalController {
 	
 	@FXML
     public void handleToUser() {
-	    try {
+		try {
 	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/User.fxml"));
-	        Parent loginPage = loader.load();
+	        Parent userPage = loader.load();
 
-	        Stage stage = (Stage) DashboardNav.getScene().getWindow();
-	        stage.setScene(new Scene(loginPage));
+	        Stage stage = (Stage) UserNav.getScene().getWindow();
+	        stage.setScene(new Scene(userPage));
 	        stage.setTitle("User");
 	        stage.show();
 	    } catch (IOException e) {

@@ -59,17 +59,27 @@ public class FoodlistController {
     
     @FXML
     public void handleToHome() {
-        showAlert("Alert", "This is Home Page.");
-        System.out.println("clicked");
+    	try {
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/Goal.fxml"));
+	        Parent homePage = loader.load();
+
+	        Stage stage = (Stage) HomeNav.getScene().getWindow();
+	        stage.setScene(new Scene(homePage));
+	        stage.setTitle("Home");
+	        stage.show();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        showAlert("Fail to open.", "CANNOT load the Home page.");
+	    }
     }
 	@FXML
     public void handleToDashboard() {
-	    try {
+		try {
 	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/Dashboard.fxml"));
-	        Parent loginPage = loader.load();
+	        Parent dashboardPage = loader.load();
 
 	        Stage stage = (Stage) DashboardNav.getScene().getWindow();
-	        stage.setScene(new Scene(loginPage));
+	        stage.setScene(new Scene(dashboardPage));
 	        stage.setTitle("Dashboard");
 	        stage.show();
 	    } catch (IOException e) {
@@ -80,12 +90,12 @@ public class FoodlistController {
 	
 	@FXML
     public void handleToUser() {
-	    try {
+		try {
 	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/User.fxml"));
-	        Parent loginPage = loader.load();
+	        Parent userPage = loader.load();
 
-	        Stage stage = (Stage) DashboardNav.getScene().getWindow();
-	        stage.setScene(new Scene(loginPage));
+	        Stage stage = (Stage) UserNav.getScene().getWindow();
+	        stage.setScene(new Scene(userPage));
 	        stage.setTitle("User");
 	        stage.show();
 	    } catch (IOException e) {

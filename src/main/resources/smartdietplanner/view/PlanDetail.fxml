@@ -14,12 +14,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="1000.0" 
-xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdietplanner.controller.PlanDetailController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdietplanner.controller.PlanDetailController">
    <children>
       <ImageView fitHeight="150.0" fitWidth="291.0" layoutX="14.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../images/Logo-SDP.png" />
+            <Image url="@../../../images/Logo-SDP.png" />
          </image>
       </ImageView>
       <Text layoutX="360.0" layoutY="171.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Plan Today" textAlignment="CENTER">
@@ -63,9 +62,9 @@ xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:c
          <items>
             <HBox alignment="CENTER" prefHeight="0.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Label fx:id="HomeAlert" onMouseClicked="#handleToHome" text="Home" />
-                  <Label fx:id="DashboardAlert" onMouseClicked="#handleToDashboard" text="Dashboard" />
-                  <Button fx:id="UserAlert" mnemonicParsing="false" onMouseClicked="#handleToUser" text="User" />
+                  <Label fx:id="HomeNav" onMouseClicked="#handleToHome" text="Home" />
+                  <Label fx:id="DashboardNav" onMouseClicked="#handleToDashboard" text="Dashboard" />
+                  <Button fx:id="UserNav" mnemonicParsing="false" onMouseClicked="#handleToUser" text="User" />
                </children>
             </HBox>
          </items>

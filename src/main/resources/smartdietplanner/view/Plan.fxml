@@ -13,12 +13,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="1000.0" 
-xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdietplanner.controller.PlanController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdietplanner.controller.PlanController">
    <children>
       <ImageView fitHeight="150.0" fitWidth="291.0" layoutX="14.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../images/Logo-SDP.png" />
+            <Image url="@../../../images/Logo-SDP.png" />
          </image>
       </ImageView>
       <Text layoutX="418.0" layoutY="133.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Plan" textAlignment="CENTER">
@@ -30,7 +29,7 @@ xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:c
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="360.0" prefWidth="259.0" style="-fx-background-color: #E8E8E8; -fx-background-radius: 10;">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Breakfast" textAlignment="CENTER" wrappingWidth="250.73046875">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Carbohydrates" textAlignment="CENTER" wrappingWidth="250.73046875">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -58,7 +57,7 @@ xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:c
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="445.0" prefWidth="259.0" style="-fx-background-color: #E8E8E8; -fx-background-radius: 10;">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lunch" textAlignment="CENTER" wrappingWidth="250.73046875">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Proteins" textAlignment="CENTER" wrappingWidth="250.73046875">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -89,7 +88,7 @@ xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:c
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="445.0" prefWidth="259.0" style="-fx-background-color: #E8E8E8; -fx-background-radius: 10;">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dinner" textAlignment="CENTER" wrappingWidth="250.73046875">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fats" textAlignment="CENTER" wrappingWidth="250.73046875">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -134,9 +133,9 @@ xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:c
          <items>
             <HBox alignment="CENTER" prefHeight="0.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Label fx:id="HomeAlert" onMouseClicked="#handleToHome" text="Home" />
-                  <Label fx:id="DashboardAlert" onMouseClicked="#handleToDashboard" text="Dashboard" />
-                  <Button fx:id="UserAlert" mnemonicParsing="false" onMouseClicked="#handleToUser" text="User" />
+                  <Label fx:id="HomeNav" onMouseClicked="#handleToHome" text="Home" />
+                  <Label fx:id="DashboardNav" onMouseClicked="#handleToDashboard" text="Dashboard" />
+                  <Button fx:id="UserNav" mnemonicParsing="false" onMouseClicked="#handleToUser" text="User" />
                </children>
             </HBox>
          </items>

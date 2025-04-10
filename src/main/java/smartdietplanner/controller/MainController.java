@@ -41,6 +41,9 @@ public class MainController {
 	private Button UserAlert;
 	
 	
+	private File userDataFile;
+	
+	
 	@FXML
     public void handleToHome() {
         showLoginAlert();
@@ -71,12 +74,55 @@ public class MainController {
     		Main.setUserStatus(new User(userName, password));
             System.out.println(userName + " success.");
             
-            //jump to home page
-            jumpToHomePage(userName);
+            String uuid = getUUID(userName);
+            if(uuid != null) {
+            	//jump to home page
+                jumpToHomePage(userName);
+            } else {
+            	System.out.println(userName + " UUID not found.");
+            }
         } else {
             showAlert("Fail to log in.", "Wrong password/username.");
         }
     }
+	
+	//C:\Users\******(adminName)\SmartDietPlanner\SDP_userdata.txt
+	private String getUUID(String userName) {
+		
+		//Get admin
+        String userHome = System.getProperty("user.home");
+        //Read data
+        userDataFile = new File(userHome, "SmartDietPlanner/SDP_userdata.txt");
+        
+        //If not exist
+        if (!userDataFile.exists()) {
+            System.out.println("User Data loaded fail.");
+            return null;
+        }
+        
+        //test
+        System.out.println("Data: " + userDataFile);
+		
+
+	    try (BufferedReader br = new BufferedReader(new FileReader(userDataFile))) {
+	        String line;
+	        while ((line = br.readLine()) != null) {
+	            String[] parts = line.split(",");
+	            if (parts.length == 2 && parts[0].trim().equals(userName)) {
+	                return parts[1].trim();  //uuid
+	            }
+	        }
+	    } catch (IOException e) {
+	    	System.err.println("Err when reading: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	       
+	    System.out.println("User not found: " + userName);
+	    return null;
+	}
+	
+	
+	
 	
 	
 	private boolean validPassword(String userName, String password) {
