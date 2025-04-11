@@ -13,14 +13,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="1000.0" 
-			xmlns="http://javafx.com/javafx/23.0.1" 
-			xmlns:fx="http://javafx.com/fxml/1"
-			fx:controller="smartdietplanner.controller.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdietplanner.controller.DashboardController">
    <children>
       <ImageView fitHeight="150.0" fitWidth="291.0" layoutX="14.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../images/Logo-SDP.png" />
+            <Image url="@../../../images/Logo-SDP.png" />
          </image>
       </ImageView>
       <Text layoutX="407.0" layoutY="133.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" textAlignment="CENTER">
@@ -32,7 +29,7 @@
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="445.0" prefWidth="259.0" style="-fx-background-color: #E8E8E8; -fx-background-radius: 10;">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Your Recipe Today" textAlignment="CENTER" wrappingWidth="250.73046875">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nutritional Allocation" textAlignment="CENTER" wrappingWidth="250.73046875">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -40,7 +37,7 @@
                         <Insets bottom="80.0" top="50.0" />
                      </VBox.margin>
                   </Text>
-                  <Label text="Breakfast:">
+                  <Label text="Carbohydrates: ">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -48,7 +45,7 @@
                         <Insets bottom="15.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="Lunch:">
+                  <Label text="Proteins: ">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -56,7 +53,7 @@
                         <Insets bottom="15.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="Dinner: ">
+                  <Label text="Fats: ">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -142,9 +139,9 @@
          <items>
             <HBox alignment="CENTER" prefHeight="0.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Label fx:id="HomeAlert" onMouseClicked="#handleToHome" text="Home" />
-                  <Label fx:id="DashboardAlert" onMouseClicked="#handleToDashboard" text="Dashboard" />
-                  <Button fx:id="UserAlert" mnemonicParsing="false" onMouseClicked="#handleToUser" text="User" />
+                  <Label fx:id="HomeNav" onMouseClicked="#handleToHome" text="Home" />
+                  <Label fx:id="DashboardNav" onMouseClicked="#handleToDashboard" text="Dashboard" />
+                  <Button fx:id="UserNav" mnemonicParsing="false" onMouseClicked="#handleToUser" text="User" />
                </children>
             </HBox>
          </items>

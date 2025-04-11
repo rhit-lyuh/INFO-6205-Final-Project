@@ -37,6 +37,7 @@ public class FoodlistController {
         this.planController = controller;
     }
 
+
     @FXML
     public void initialize() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));

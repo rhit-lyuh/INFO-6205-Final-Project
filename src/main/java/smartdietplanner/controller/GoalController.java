@@ -1,5 +1,7 @@
 package smartdietplanner.controller;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,6 +41,20 @@ public class GoalController {
     @FXML
     public void handleToUser() {
         navigateTo("/smartdietplanner/view/User.fxml", "User");
+
+		try {
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/User.fxml"));
+	        Parent userPage = loader.load();
+
+	        Stage stage = (Stage) UserNav.getScene().getWindow();
+	        stage.setScene(new Scene(userPage));
+	        stage.setTitle("User");
+	        stage.show();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        showAlert("Fail to open.", "CANNOT load the User page.");
+	    }
+
     }
 
     @FXML
@@ -53,15 +69,16 @@ public class GoalController {
             double goalWeight = Double.parseDouble(goalWeightField.getText());
             int dietDays = Integer.parseInt(dietDaysField.getText());
 
-            // 创建营养目标
+            // Create the nutrition goal
             NutritionGoal goal = new NutritionGoal(currentWeight, goalWeight, dietDays);
 
-            // 初始化空的 MealPlan（由用户后续手动添加）
+            // Initialize an empty MealPlan (to be manually added by the user later)
             MealPlan mealPlan = new MealPlan();
 
-            // 跳转到 Plan 页面并传值
+            // Navigate to the Plan page and pass data
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/Plan.fxml"));
             Parent root = loader.load();
+
 
             smartdietplanner.controller.PlanController controller = loader.getController();
             controller.setNutritionGoal(goal);
@@ -85,7 +102,7 @@ public class GoalController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent page = loader.load();
 
-            Stage stage = (Stage) HomeNav.getScene().getWindow(); // 可以任意一个控件
+            Stage stage = (Stage) HomeNav.getScene().getWindow(); 
             stage.setScene(new Scene(page));
             stage.setTitle(title);
             stage.show();

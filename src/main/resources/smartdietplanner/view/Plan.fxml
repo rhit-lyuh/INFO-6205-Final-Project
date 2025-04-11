@@ -6,10 +6,19 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+
 
 <AnchorPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdietplanner.controller.PlanController">
 
     <children>
+    <ImageView fitHeight="150.0" fitWidth="291.0" layoutX="14.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/Logo-SDP.png" />
+         </image>
+      </ImageView>
         <Label layoutX="360.0" layoutY="40.0" text="Your Smart Diet Plan">
             <font>
                 <Font name="System Bold" size="28.0" />
@@ -47,5 +56,6 @@
             </font>
         </Button>
     </children>
+
 </AnchorPane>
 
