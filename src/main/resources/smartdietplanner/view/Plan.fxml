@@ -29,6 +29,9 @@
                 <TableColumn fx:id="nameColumn" prefWidth="450.0" text="Food Name" />
                 <TableColumn fx:id="weightColumn" prefWidth="448.6666564941406" text="Weight (g)" />
             </columns>
+            <placeholder>
+        		<Label text="No food items in the meal plan yet." />
+    		</placeholder>
         </TableView>
 
         <Label fx:id="summaryLabel" layoutX="50.0" layoutY="520.0" prefWidth="900.0" wrapText="true">
