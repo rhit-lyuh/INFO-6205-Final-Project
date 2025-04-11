@@ -25,6 +25,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import smartdietplanner.model.User;
+import smartdietplanner.model.UserData;
 import smartdietplanner.Main;
 
 public class RegisterController {
@@ -66,6 +67,9 @@ public class RegisterController {
 		//New a User Object
 		//userID userName password 		
 		User user = new User(userName, password);
+		
+		//Set user name and uuid to UserData
+		UserData.getData().setUserData(userName, user.getUserId());
 		
 		if (!isUserExists(user)) {  //Check User File success or not
             users.add(user);

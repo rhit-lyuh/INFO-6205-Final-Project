@@ -40,19 +40,20 @@ public class GoalController {
 
     @FXML
     public void handleToUser() {
-        navigateTo("/smartdietplanner/view/User.fxml", "User");
+//        navigateTo("/smartdietplanner/view/User.fxml", "User");
 
 		try {
 	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/User.fxml"));
 	        Parent userPage = loader.load();
 
 	        Stage stage = (Stage) UserNav.getScene().getWindow();
+	        
 	        stage.setScene(new Scene(userPage));
 	        stage.setTitle("User");
 	        stage.show();
 	    } catch (IOException e) {
 	        e.printStackTrace();
-	        showAlert("Fail to open.", "CANNOT load the User page.");
+	        showAlert("Fail to open.", "CANNOT load the User page." + e.getMessage());
 	    }
 
     }

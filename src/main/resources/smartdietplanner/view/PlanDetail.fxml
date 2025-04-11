@@ -30,7 +30,7 @@
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="342.0" prefWidth="497.0" style="-fx-background-color: #E8E8E8; -fx-background-radius: 10;">
                <children>
-                  <Label text="Lunch: 320 kcal">
+                  <Label text="Total: 3200 kcal">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
@@ -43,7 +43,7 @@
                         <Insets bottom="25.0" top="20.0" />
                      </VBox.margin>
                   </ListView>
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="Back">
+                  <Button fx:id="back" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleToDashboard" prefHeight="40.0" prefWidth="130.0" text="Back">
                      <font>
                         <Font size="17.0" />
                      </font>

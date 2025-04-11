@@ -37,7 +37,7 @@
                         <Insets bottom="80.0" top="50.0" />
                      </VBox.margin>
                   </Text>
-                  <Label text="Carbohydrates: ">
+                  <Label fx:id="Carbo" text="Carbohydrates: ">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -45,7 +45,7 @@
                         <Insets bottom="15.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="Proteins: ">
+                  <Label fx:id="Protein" text="Proteins: ">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -53,7 +53,7 @@
                         <Insets bottom="15.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="Fats: ">
+                  <Label fx:id="Fat" text="Fats: ">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -61,7 +61,7 @@
                         <Insets bottom="100.0" />
                      </VBox.margin>
                   </Label>
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="See Details">
+                  <Button fx:id="detailNav1" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleToDetail" prefHeight="40.0" prefWidth="130.0" text="See Details">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -81,7 +81,7 @@
                         <Insets bottom="100.0" top="50.0" />
                      </VBox.margin>
                   </Text>
-                  <Label text="320 kcal">
+                  <Label text="3200 kcal">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -89,7 +89,7 @@
                         <Insets bottom="150.0" />
                      </VBox.margin>
                   </Label>
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="See Details">
+                  <Button fx:id="detailNav2" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleToDetail" prefHeight="40.0" prefWidth="130.0" text="See Details">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -120,7 +120,7 @@
                         <Insets bottom="150.0" />
                      </VBox.margin>
                   </Label>
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="See Details">
+                  <Button fx:id="detailNav3" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleToDetail" prefHeight="40.0" prefWidth="130.0" text="See Details">
                      <font>
                         <Font size="17.0" />
                      </font>
