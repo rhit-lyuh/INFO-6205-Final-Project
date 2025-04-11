@@ -11,10 +11,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import smartdietplanner.model.Food;
 import smartdietplanner.model.MealPlan;
+import smartdietplanner.service.Sorter;
 import smartdietplanner.util.FileIO;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
 
 public class FoodlistController {
 
@@ -121,5 +124,40 @@ public class FoodlistController {
         alert.setContentText(msg);
         alert.showAndWait();
     }
+    
+    
+    
+    //Sort
+    @FXML
+    private void handleSortByName() {
+        Sorter sorter = new Sorter(true, false, false, false, false, false, new ArrayList<>(foodTable.getItems()));
+        foodTable.setItems(FXCollections.observableArrayList(sorter.getSortedFoodList()));
+    }
+    
+    @FXML
+    private void handleSortByCalories() {
+        Sorter sorter = new Sorter(false, true, false, false, false, false, new ArrayList<>(foodTable.getItems()));
+        foodTable.setItems(FXCollections.observableArrayList(sorter.getSortedFoodList()));
+    }
+
+    @FXML
+    private void handleSortByProtein() {
+        Sorter sorter = new Sorter(false, false, true, false, false, false, new ArrayList<>(foodTable.getItems()));
+        foodTable.setItems(FXCollections.observableArrayList(sorter.getSortedFoodList()));
+    }
+
+   
+    @FXML
+    private void handleSortByCarbs() {
+        Sorter sorter = new Sorter(false, false, false, true, false, false, new ArrayList<>(foodTable.getItems()));
+        foodTable.setItems(FXCollections.observableArrayList(sorter.getSortedFoodList()));
+    }
+    
+    @FXML
+    private void handleSortByFat() {
+        Sorter sorter = new Sorter(false, false, false, false, true, false, new ArrayList<>(foodTable.getItems()));
+        foodTable.setItems(FXCollections.observableArrayList(sorter.getSortedFoodList()));
+    }
+
 }
 

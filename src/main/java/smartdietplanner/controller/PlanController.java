@@ -1,5 +1,6 @@
 package smartdietplanner.controller;
 
+import java.io.IOException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,93 +14,18 @@ import smartdietplanner.model.Food;
 import smartdietplanner.model.MealPlan;
 import smartdietplanner.model.NutritionGoal;
 
-import java.io.IOException;
-
-
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.stage.Stage;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
-import javafx.event.ActionEvent;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-
-import smartdietplanner.model.User;
-import smartdietplanner.Main;
-
-
+/**
+ * Controller for the Plan page, which allows users to view and manage their meal plan
+ * after setting their nutrition goal.
+ */
 public class PlanController {
-	
-    //Bar
-	@FXML
-	private Label HomeNav;
-	@FXML
-	private Label DashboardNav;
-	@FXML
-	private Button UserNav;
-	
-	//Bar
-	@FXML
-    public void handleToHome() {
-		try {
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/Goal.fxml"));
-	        Parent homePage = loader.load();
 
-	        Stage stage = (Stage) HomeNav.getScene().getWindow();
-	        stage.setScene(new Scene(homePage));
-	        stage.setTitle("Home");
-	        stage.show();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        showAlert("Fail to open.", "CANNOT load the Home page.");
-	    }
-    }
-	
-	@FXML
-    public void handleToDashboard() {
-		try {
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/Dashboard.fxml"));
-	        Parent dashboardPage = loader.load();
+    // Top navigation bar components
+    @FXML private Label HomeNav;
+    @FXML private Label DashboardNav;
+    @FXML private Button UserNav;
 
-	        Stage stage = (Stage) DashboardNav.getScene().getWindow();
-	        stage.setScene(new Scene(dashboardPage));
-	        stage.setTitle("Dashboard");
-	        stage.show();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        showAlert("Fail to open.", "CANNOT load the Dashboard page.");
-	    }
-    }
-	
-	@FXML
-    public void handleToUser() {
-		try {
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/User.fxml"));
-	        Parent userPage = loader.load();
-
-	        Stage stage = (Stage) UserNav.getScene().getWindow();
-	        stage.setScene(new Scene(userPage));
-	        stage.setTitle("User");
-	        stage.show();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        showAlert("Fail to open.", "CANNOT load the User page.");
-	    }
-    }
-
-	
-	
-
+    // Plan page UI components
     @FXML private Label goalLabel;
     @FXML private TableView<Food> mealTable;
     @FXML private TableColumn<Food, String> nameColumn;
@@ -108,9 +34,59 @@ public class PlanController {
     @FXML private Button addFoodButton;
     @FXML private Button backButton;
 
+    // Data variables
     private MealPlan mealPlan = new MealPlan();
     private NutritionGoal goal;
     private final ObservableList<Food> foodList = FXCollections.observableArrayList();
+
+    /**Navigation Methods (Top Bar)**/
+
+    @FXML
+    public void handleToHome() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/Goal.fxml"));
+            Parent homePage = loader.load();
+            Stage stage = (Stage) HomeNav.getScene().getWindow();
+            stage.setScene(new Scene(homePage));
+            stage.setTitle("Home");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Fail to open.", "CANNOT load the Home page.");
+        }
+    }
+
+    @FXML
+    public void handleToDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/Dashboard.fxml"));
+            Parent dashboardPage = loader.load();
+            Stage stage = (Stage) DashboardNav.getScene().getWindow();
+            stage.setScene(new Scene(dashboardPage));
+            stage.setTitle("Dashboard");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Fail to open.", "CANNOT load the Dashboard page.");
+        }
+    }
+
+    @FXML
+    public void handleToUser() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/User.fxml"));
+            Parent userPage = loader.load();
+            Stage stage = (Stage) UserNav.getScene().getWindow();
+            stage.setScene(new Scene(userPage));
+            stage.setTitle("User");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Fail to open.", "CANNOT load the User page.");
+        }
+    }
+
+    /**Logic for Meal Planning**/
 
     public void setNutritionGoal(NutritionGoal goal) {
         this.goal = goal;
@@ -118,45 +94,51 @@ public class PlanController {
         updateMealPlanView();
     }
 
-    public void setMealPlan(MealPlan mealPlan) {
-        this.mealPlan = mealPlan;
-        updateMealPlanView();
-    }
-    
     public NutritionGoal getNutritionGoal() {
         return goal;
     }
 
+    public void setMealPlan(MealPlan mealPlan) {
+        this.mealPlan = mealPlan;
+        updateMealPlanView();
+    }
 
     private void updateGoalLabel() {
         if (goal != null) {
             String text = String.format("Target: %.0f kcal | %.0f g protein | %.0f g carbs | %.0f g fat",
-                    goal.getTargetCalories(), goal.getTargetProtein(), goal.getTargetCarbs(), goal.getTargetFat());
+                    goal.getTargetCalories(), goal.getTargetProtein(),
+                    goal.getTargetCarbs(), goal.getTargetFat());
             goalLabel.setText(text);
         }
     }
 
     public void updateMealPlanView() {
+        // Refresh the table with food items
         foodList.setAll(mealPlan.getFoodItems().keySet());
         mealTable.setItems(foodList);
 
+        // Display nutrition summary
         String summary = String.format("Total: %.1f kcal | %.1f g protein | %.1f g carbs | %.1f g fat",
                 mealPlan.getTotalCalories(), mealPlan.getTotalProtein(),
                 mealPlan.getTotalCarbs(), mealPlan.getTotalFat());
 
         if (goal != null && mealPlan.getTotalCalories() > goal.getTargetCalories()) {
-            summary += "\n⚠Total calories exceed your target!";
+            summary += "\n⚠ Total calories exceed your target!";
         }
 
         summaryLabel.setText(summary);
     }
 
+    /**Table Initialization and Row Events**/
+
     @FXML
     private void initialize() {
+        // Setup table columns
         nameColumn.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getName()));
         weightColumn.setCellValueFactory(cell -> new javafx.beans.property.SimpleIntegerProperty(
                 mealPlan.getFoodItems().getOrDefault(cell.getValue(), 0)).asObject());
 
+        // Double-click row to edit food weight
         mealTable.setRowFactory(tv -> {
             TableRow<Food> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -185,6 +167,8 @@ public class PlanController {
             return row;
         });
     }
+
+    /**Navigation: Add Food & Back**/
 
     @FXML
     public void handleAddFood() {
@@ -221,10 +205,12 @@ public class PlanController {
         }
     }
 
+    // Used by FoodlistController after food is added
     public void updateMealPlanViewAfterAdd() {
-        updateMealPlanView(); // Called after food is added
+        updateMealPlanView();
     }
 
+    // Utility method to show alert dialog
     private void showAlert(String title, String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -233,4 +219,3 @@ public class PlanController {
         alert.showAndWait();
     }
 }
-

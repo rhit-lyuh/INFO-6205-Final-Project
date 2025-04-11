@@ -9,13 +9,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdietplanner.controller.FoodlistController">
 
     <children>
         <ImageView fitHeight="97.0" fitWidth="402.0" layoutX="299.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../../../images/Logo-SDP.png" />
+                <Image url="images/Logo-SDP.png" />
             </image>
         </ImageView>
 
@@ -40,5 +39,11 @@
                 <Font size="14.0" />
             </font>
         </Button>
+      <Button fx:id="sortByNameBtn" layoutX="881.0" layoutY="257.0" onAction="#handleSortByName" text="Sort by Name" />
+      <Button fx:id="sortByCaloriesBtn" layoutX="876.0" layoutY="326.0" onAction="#handleSortByCalories" text="Sort by Calories" />
+	  <Button fx:id="sortByProteinBtn" layoutX="878.0" layoutY="396.0" onAction="#handleSortByProtein" text="Sort by Protein" />
+	  <Button fx:id="sortByCarbsBtn" layoutX="882.0" layoutY="471.0" onAction="#handleSortByCarbs" text="Sort by Carbs" />
+	  <Button fx:id="sortByFatBtn" layoutX="890.0" layoutY="543.0" onAction="#handleSortByFat" text="Sort by Fat" />
+      
     </children>
 </AnchorPane>
