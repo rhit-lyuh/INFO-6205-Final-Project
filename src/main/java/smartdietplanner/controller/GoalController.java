@@ -1,116 +1,105 @@
 package smartdietplanner.controller;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-//import java.util.List;
-import java.util.Map;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
-import smartdietplanner.model.User;
-import smartdietplanner.Main;
+import smartdietplanner.model.MealPlan;
+import smartdietplanner.model.NutritionGoal;
 
 public class GoalController {
-	
-    //Bar
-	@FXML
-	private Label HomeNav;
-	@FXML
-	private Label DashboardNav;
-	@FXML
-	private Button UserNav;
-	@FXML
-	private Button FoodNav;
 
-	
-    
-  	
+    // Navigation Bar
+    @FXML private Label HomeNav;
+    @FXML private Label DashboardNav;
+    @FXML private Button UserNav;
+    @FXML private Button FoodNav;
 
-	
-	
-	//Bar
-	@FXML
+    // Input fields
+    @FXML private TextField currentWeightField;
+    @FXML private TextField goalWeightField;
+    @FXML private TextField dietDaysField;
+
+    // Handlers for navigation
+    @FXML
     public void handleToHome() {
         showAlert("Alert", "This is Home Page.");
-        System.out.println("clicked");
     }
-	@FXML
+
+    @FXML
     public void handleToDashboard() {
-	    try {
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/Dashboard.fxml"));
-	        Parent loginPage = loader.load();
-
-	        Stage stage = (Stage) DashboardNav.getScene().getWindow();
-	        stage.setScene(new Scene(loginPage));
-	        stage.setTitle("Dashboard");
-	        stage.show();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        showAlert("Fail to open.", "CANNOT load the Dashboard page.");
-	    }
+        navigateTo("/smartdietplanner/view/Dashboard.fxml", "Dashboard");
     }
-	
-	@FXML
+
+    @FXML
     public void handleToUser() {
-	    try {
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/User.fxml"));
-	        Parent loginPage = loader.load();
-
-	        Stage stage = (Stage) DashboardNav.getScene().getWindow();
-	        stage.setScene(new Scene(loginPage));
-	        stage.setTitle("User");
-	        stage.show();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        showAlert("Fail to open.", "CANNOT load the User page.");
-	    }
+        navigateTo("/smartdietplanner/view/User.fxml", "User");
     }
-	
-	
-	@FXML
-	public void handleToFood() {
-	    try {
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/Foodlist.fxml"));
-	        Parent foodListPage = loader.load();
 
-	        Stage stage = (Stage) FoodNav.getScene().getWindow();
-	        stage.setScene(new Scene(foodListPage));
-	        stage.setTitle("Food List");
-	        stage.show();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        showAlert("Failed to open", "Unable to load the Food List page.");
-	    }
-	}
+    @FXML
+    public void handleToFood() {
+        navigateTo("/smartdietplanner/view/Foodlist.fxml", "Food List");
+    }
 
+    @FXML
+    public void handleGeneratePlan() {
+        try {
+            double currentWeight = Double.parseDouble(currentWeightField.getText());
+            double goalWeight = Double.parseDouble(goalWeightField.getText());
+            int dietDays = Integer.parseInt(dietDaysField.getText());
 
-	
-	//alert
-  	private void showAlert(String title, String UserNameMsg) {
-  		Alert alert = new Alert(AlertType.ERROR);
-  	       alert.setTitle(title);
-  	       alert.setHeaderText(null); 
-  	       alert.setContentText(UserNameMsg);
-  	       alert.showAndWait(); 
-  	}
-	
+            // 创建营养目标
+            NutritionGoal goal = new NutritionGoal(currentWeight, goalWeight, dietDays);
+
+            // 初始化空的 MealPlan（由用户后续手动添加）
+            MealPlan mealPlan = new MealPlan();
+
+            // 跳转到 Plan 页面并传值
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdietplanner/view/Plan.fxml"));
+            Parent root = loader.load();
+
+            smartdietplanner.controller.PlanController controller = loader.getController();
+            controller.setNutritionGoal(goal);
+            controller.setMealPlan(mealPlan);
+
+            Stage stage = (Stage) currentWeightField.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Your Smart Diet Plan");
+            stage.show();
+
+        } catch (NumberFormatException e) {
+            showAlert("Input Error", "Please enter valid numbers for weight and days.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "Something went wrong while generating the plan.");
+        }
+    }
+
+    private void navigateTo(String fxmlPath, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent page = loader.load();
+
+            Stage stage = (Stage) HomeNav.getScene().getWindow(); // 可以任意一个控件
+            stage.setScene(new Scene(page));
+            stage.setTitle(title);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Navigation Error", "Failed to open " + title + " page.");
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }
-
-

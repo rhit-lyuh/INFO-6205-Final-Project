@@ -1,102 +1,75 @@
 package smartdietplanner.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class MealPlan {
 
-    //A list of Food objects representing the meals in the meal plan.
-    private List<Food> meals;
-    private double totalCalories;
-    private double totalProtein;
-    private double totalCarbs;
-    private double totalFat;
+    // Map<Food, weightInGrams>
+    private Map<Food, Integer> foodItems = new LinkedHashMap<>();
 
-    //Constructor
-    public MealPlan() {
-        this.meals = new ArrayList<>();
-        this.totalCalories = 0;
-        this.totalProtein = 0;
-        this.totalCarbs = 0;
-        this.totalFat = 0;
+    public void addFood(Food food, int grams) {
+        foodItems.put(food, grams);
     }
 
-    /**
-     * Adds a Food object to the meal plan and updates the total nutritional values.
-     *
-     * @param food the Food object to add
-     */
-    public void addFood(Food food) {
-    	this.meals.add(food);
-        this.totalCalories += Math.round( food.getCalories()*100)/100;
-        this.totalProtein += Math.round( food.getProtein()*100)/100;
-        this.totalCarbs += Math.round( food.getCarbs()*100)/100;
-        this.totalFat += Math.round( food.getFat()*100)/100;
-    }
-
-    /**
-     * Removes a Food object from the meal plan and updates the total nutritional values.
-     *
-     * @param food the Food object to remove
-     */
     public void removeFood(Food food) {
-        if(this.meals.remove(food)) {
-        	this.totalCalories -=Math.round( food.getCalories()*100)/100;
-        	this.totalProtein -= Math.round( food.getProtein()*100)/100;
-        	this.totalCarbs -= Math.round( food.getCarbs()*100)/100;
-        	this.totalFat -= Math.round( food.getFat()*100)/100;
+        foodItems.remove(food);
+    }
+    
+    public void increaseWeight(Food food, int grams) {
+        foodItems.put(food, foodItems.getOrDefault(food, 0) + grams);
+    }
+
+    public void decreaseWeight(Food food, int grams) {
+        if (foodItems.containsKey(food)) {
+            int current = foodItems.get(food);
+            int updated = current - grams;
+            if (updated > 0) {
+                foodItems.put(food, updated);
+            } else {
+                foodItems.remove(food);
+            }
         }
     }
 
-    //Getter and Setter
-    public List<Food> getMeals() {
-        return this.meals;
-    }
-
-    public void setMeals(List<Food> meals) {
-        this.meals = meals;
-    }
 
     public double getTotalCalories() {
-        return  this.totalCalories;
-    }
-
-    public void setTotalCalories(double totalCalories) {
-        this.totalCalories = totalCalories;
+        return foodItems.entrySet().stream()
+            .mapToDouble(e -> e.getKey().getCalories() * e.getValue() / 100.0)
+            .sum();
     }
 
     public double getTotalProtein() {
-        return this.totalProtein;
-    }
-
-    public void setTotalProtein(double totalProtein) {
-        this.totalProtein = totalProtein;
+        return foodItems.entrySet().stream()
+            .mapToDouble(e -> e.getKey().getProtein() * e.getValue() / 100.0)
+            .sum();
     }
 
     public double getTotalCarbs() {
-        return this.totalCarbs;
-    }
-
-    public void setTotalCarbs(double totalCarbs) {
-        this.totalCarbs = totalCarbs;
+        return foodItems.entrySet().stream()
+            .mapToDouble(e -> e.getKey().getCarbs() * e.getValue() / 100.0)
+            .sum();
     }
 
     public double getTotalFat() {
-        return this.totalFat;
+        return foodItems.entrySet().stream()
+            .mapToDouble(e -> e.getKey().getFat() * e.getValue() / 100.0)
+            .sum();
     }
 
-    public void setTotalFat(double totalFat) {
-        this.totalFat = totalFat;
+    public Map<Food, Integer> getFoodItems() {
+        return foodItems;
     }
 
     @Override
     public String toString() {
-        return "MealPlan{" +
-                "meals=" + meals +
-                ", totalCalories=" + totalCalories +
-                ", totalProtein=" + totalProtein +
-                ", totalCarbs=" + totalCarbs +
-                ", totalFat=" + totalFat +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        foodItems.forEach((food, grams) -> {
+            sb.append(String.format("%s - %dg\n", food.getName(), grams));
+        });
+        sb.append(String.format("Calories: %.1f kcal, Protein: %.1f g, Carbs: %.1f g, Fat: %.1f g",
+                getTotalCalories(), getTotalProtein(), getTotalCarbs(), getTotalFat()));
+        return sb.toString();
     }
 }
+
