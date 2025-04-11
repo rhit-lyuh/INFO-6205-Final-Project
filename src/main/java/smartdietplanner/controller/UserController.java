@@ -1,6 +1,7 @@
 package smartdietplanner.controller;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -8,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import smartdietplanner.model.UserData;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -37,6 +39,34 @@ public class UserController {
 	private Button toDash;  //handleToDashboard
 	@FXML
 	private Button toPlan;  //handleToPlan
+	
+	
+	//User
+	@FXML
+	public void initialize() {	    
+	    //Content
+	    String userNameText = "User Name: " + UserData.getData().getUserName();
+	    String uuidText = "UUID: " + UserData.getData().getUUID().toString();
+	    
+	    //test
+	    System.out.println(userNameText);
+	    System.out.println(uuidText);
+	    
+		//Get data from UserData
+		userName.setText(userNameText);
+		uuid.setText(uuidText);
+		
+		String userNameValue = UserData.getData().getUserName();
+	    String uuidValue = UserData.getData().getUUID().toString();
+		
+		if (userNameValue == null) 
+	        userName.setText("Unknown User");
+
+
+	    if (uuidValue == null) 
+	        uuid.setText("No UUID available");
+
+	}
 	
 	
 	
@@ -111,7 +141,7 @@ public class UserController {
 		        showAlert("Fail to open.", "CANNOT load the Login page.");
 		    }
 	    }
-
+		
 		
 		//alert
 	  	private void showAlert(String title, String UserNameMsg) {

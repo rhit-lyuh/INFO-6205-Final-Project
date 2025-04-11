@@ -26,12 +26,12 @@
       </ImageView>
       <VBox layoutX="500.0" layoutY="163.0" prefHeight="123.0" prefWidth="284.0">
          <children>
-            <Label prefHeight="36.0" prefWidth="95.0" text="User Name:" textAlignment="RIGHT">
+            <Label fx:id="userName" prefHeight="36.0" prefWidth="243.0" text="User Name:" textAlignment="RIGHT">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label prefHeight="31.0" prefWidth="96.0" text="UUID:" textAlignment="RIGHT">
+            <Label fx:id="uuid" prefHeight="31.0" prefWidth="253.0" text="UUID:" textAlignment="RIGHT">
                <font>
                   <Font size="17.0" />
                </font>

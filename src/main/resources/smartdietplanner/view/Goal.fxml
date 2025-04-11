@@ -98,12 +98,14 @@
       </HBox>
       <ToolBar layoutX="-5.0" prefHeight="34.0" prefWidth="1010.0">
          <items>
-            <HBox alignment="CENTER" prefHeight="23.0" prefWidth="297.0" spacing="20.0">
+            <HBox alignment="CENTER" prefHeight="24.0" prefWidth="201.0" spacing="20.0">
                <children>
-                  <Label fx:id="HomeNav" onMouseClicked="#handleToHome" prefHeight="15.0" prefWidth="40.0" text="Home" />
-                  <Label fx:id="DashboardNav" onMouseClicked="#handleToDashboard" prefHeight="15.0" prefWidth="67.0" text="Dashboard" />
+                  <Label fx:id="HomeNav" onMouseClicked="#handleToHome" prefHeight="15.0" prefWidth="35.0" text="Home">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin></Label>
+                  <Label fx:id="DashboardNav" onMouseClicked="#handleToDashboard" prefHeight="15.0" prefWidth="65.0" text="Dashboard" />
                   <Button fx:id="UserNav" mnemonicParsing="false" onAction="#handleToUser" text="User" />
-                  <Button fx:id="FoodNav" mnemonicParsing="false" onMouseClicked="#handleToFood" text="Food List" />
                </children>
             </HBox>
          </items>

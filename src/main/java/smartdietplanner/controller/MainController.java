@@ -13,12 +13,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.UUID;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import smartdietplanner.model.User;
+import smartdietplanner.model.UserData;
 import smartdietplanner.Main;
 
 public class MainController {
@@ -76,6 +78,12 @@ public class MainController {
             
             String uuid = getUUID(userName);
             if(uuid != null) {
+            	//Set user name and uuid to UserData
+            	UUID uuidFake = UUID.randomUUID();
+            	//Keep 8 digit
+            	String userID = uuidFake.toString().replace("-", "").substring(0, 8);
+        		UserData.getData().setUserData(userName, userID);
+            	
             	//jump to home page
                 jumpToHomePage(userName);
             } else {

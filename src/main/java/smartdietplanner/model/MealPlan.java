@@ -1,26 +1,49 @@
 package smartdietplanner.model;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class MealPlan {
-
+	
+	//Instance
+	private static MealPlan instance;
+	
     // Map<Food, weightInGrams>
     private Map<Food, Integer> foodItems = new LinkedHashMap<>();
+    
+    public static MealPlan getInstance() {
+        if (instance == null) {
+            instance = new MealPlan();
+        }
+        return instance;
+    }
 
     public void addFood(Food food, int grams) {
+        if (food == null || grams <= 0) {
+            throw new IllegalArgumentException("Food cannot be null and weight must be positive.");
+        }
         foodItems.put(food, grams);
     }
 
     public void removeFood(Food food) {
+        if (food == null) {
+            throw new IllegalArgumentException("Food cannot be null.");
+        }
         foodItems.remove(food);
     }
     
     public void increaseWeight(Food food, int grams) {
+        if (food == null || grams <= 0) {
+            throw new IllegalArgumentException("Food cannot be null and weight must be positive.");
+        }
         foodItems.put(food, foodItems.getOrDefault(food, 0) + grams);
     }
 
     public void decreaseWeight(Food food, int grams) {
+        if (food == null || grams <= 0) {
+            throw new IllegalArgumentException("Food cannot be null and weight must be positive.");
+        }
         if (foodItems.containsKey(food)) {
             int current = foodItems.get(food);
             int updated = current - grams;
@@ -58,7 +81,7 @@ public class MealPlan {
     }
 
     public Map<Food, Integer> getFoodItems() {
-        return foodItems;
+    	return new LinkedHashMap<>(foodItems);
     }
 
     @Override
@@ -71,5 +94,15 @@ public class MealPlan {
                 getTotalCalories(), getTotalProtein(), getTotalCarbs(), getTotalFat()));
         return sb.toString();
     }
+    
+    // Enum to represent nutrient types
+    private enum NutrientType {
+        CALORIES,
+        PROTEIN,
+        CARBS,
+        FAT
+    }
+    
+    
 }
 
