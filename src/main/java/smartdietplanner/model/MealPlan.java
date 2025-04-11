@@ -1,17 +1,15 @@
 package smartdietplanner.model;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class MealPlan {
-	
-	//Instance
-	private static MealPlan instance;
-	
+public class MealPlan implements MealPlanBag {
+
+    private static MealPlan instance;
+
     // Map<Food, weightInGrams>
     private Map<Food, Integer> foodItems = new LinkedHashMap<>();
-    
+
     public static MealPlan getInstance() {
         if (instance == null) {
             instance = new MealPlan();
@@ -19,6 +17,7 @@ public class MealPlan {
         return instance;
     }
 
+    @Override
     public void addFood(Food food, int grams) {
         if (food == null || grams <= 0) {
             throw new IllegalArgumentException("Food cannot be null and weight must be positive.");
@@ -26,13 +25,15 @@ public class MealPlan {
         foodItems.put(food, grams);
     }
 
+    @Override
     public void removeFood(Food food) {
         if (food == null) {
             throw new IllegalArgumentException("Food cannot be null.");
         }
         foodItems.remove(food);
     }
-    
+
+    @Override
     public void increaseWeight(Food food, int grams) {
         if (food == null || grams <= 0) {
             throw new IllegalArgumentException("Food cannot be null and weight must be positive.");
@@ -40,6 +41,7 @@ public class MealPlan {
         foodItems.put(food, foodItems.getOrDefault(food, 0) + grams);
     }
 
+    @Override
     public void decreaseWeight(Food food, int grams) {
         if (food == null || grams <= 0) {
             throw new IllegalArgumentException("Food cannot be null and weight must be positive.");
@@ -55,33 +57,37 @@ public class MealPlan {
         }
     }
 
-
+    @Override
     public double getTotalCalories() {
         return foodItems.entrySet().stream()
             .mapToDouble(e -> e.getKey().getCalories() * e.getValue() / 100.0)
             .sum();
     }
 
+    @Override
     public double getTotalProtein() {
         return foodItems.entrySet().stream()
             .mapToDouble(e -> e.getKey().getProtein() * e.getValue() / 100.0)
             .sum();
     }
 
+    @Override
     public double getTotalCarbs() {
         return foodItems.entrySet().stream()
             .mapToDouble(e -> e.getKey().getCarbs() * e.getValue() / 100.0)
             .sum();
     }
 
+    @Override
     public double getTotalFat() {
         return foodItems.entrySet().stream()
             .mapToDouble(e -> e.getKey().getFat() * e.getValue() / 100.0)
             .sum();
     }
 
+    @Override
     public Map<Food, Integer> getFoodItems() {
-    	return new LinkedHashMap<>(foodItems);
+        return new LinkedHashMap<>(foodItems);
     }
 
     @Override
@@ -94,15 +100,4 @@ public class MealPlan {
                 getTotalCalories(), getTotalProtein(), getTotalCarbs(), getTotalFat()));
         return sb.toString();
     }
-    
-    // Enum to represent nutrient types
-    private enum NutrientType {
-        CALORIES,
-        PROTEIN,
-        CARBS,
-        FAT
-    }
-    
-    
 }
-
