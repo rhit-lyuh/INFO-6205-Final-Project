@@ -23,7 +23,7 @@ public class RecommendationEngine {
 		for (int i = 0; i < this.foodList.size(); i++) {
 			MealPlan current = new MealPlan();
         	Food food = foodList.get(i);
-            current.addFood(food); // Include element
+            current.addFood(food, 1); // Include element
             generateFoodCombination(i + 1, current); // Recurse
         }
         for (int i = 0; i< this.combinationResult.size(); i++) {
@@ -50,7 +50,7 @@ public class RecommendationEngine {
         // Try including each element starting from index
         for (int i = start; i < this.foodList.size(); i++) {
         	Food food = this.foodList.get(i);
-            current.addFood(food); // Include element
+            current.addFood(food,1); // Include element
             generateFoodCombination(i + 1, current); // Recurse
             current.removeFood(food);
         }

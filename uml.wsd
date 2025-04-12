@@ -1,0 +1,332 @@
+@startuml
+class Main{
+  - userDataFile: File {static}
+  - userNameField: Menu
+  - primaryStage: Stage {static}
+  - currentUser:User{static}
+  + getCurrentUser(): User{static}
+  + setUserStatus(user: User): void{static}
+  + getUserDataFile(): File {static}
+  + start():void
+}
+package Model{
+
+  class Food{
+    - name: String 
+    - calories:double 
+    - protein:double 
+    - carbs:double 
+    - fat:double 
+    + getName():String
+    + setName(name: String): void
+    + getCalories(): double
+    + setCalories(calories: double): void
+    + getProtein(): double
+    + setProtein(protein: double): void
+    + getCarbs(): double
+    + setCarbs(carbs: double): void
+    + getFat(): double
+    + setFat(fat: double): void
+    + toString():String
+  }
+
+  class NutritionGoal{
+    - targetCalories:double 
+    - targetProtein:double 
+    - targetCarbs:double 
+    - targetFat:double 
+    + getTargetCalories():double
+    + setTargetCalories(targetCalories: double):void
+    + getTargetProtein():double
+    + setTargetProtein(targetProtein: double):void
+    + getTargetCarbs():double
+    + setTargetCarbs(targetCarbs: double):void
+    + getTargetFat():double
+    + setTargetFat(targetFat: double):void
+    + toString():String
+  }
+  class User{
+    - userId:String
+    - userName:String
+    - password:String 
+    + getUserId():String
+    + getUserName():String
+    + setUserName(userName: String):void
+    + getPassword():String
+    + setPassword(password: String):void
+  }
+  class UserData{
+    - data:UserData {static}
+    - userName:String
+    - uuid:String 
+    + getUserName():String
+    + getUUID():String
+    + setUserData(userName: String , uuid: String ):void
+  }
+  interface MealPlanBag{
+    + addFood(food: Food, grams: int): void
+    + removeFood(food: Food ):void
+    + increaseWeight(food: Food, grams: int): void
+    + decreaseWeight(food: Food, grams: int): void
+    + getTotalCalories():double
+    + getTotalProtein():double
+    + getTotalCarbs():double
+    + getTotalFat():double
+    + getFoodItems() : Map<Food, Integer>
+  }
+  class MealPlan{
+    - foodItems: LinkedHashMap<Food, Integer>
+    - instance: MealPlan {static}
+    + getInstance():String {static}
+    + addFood(food: Food, grams: int): void
+    + removeFood(food: Food ):void
+    + increaseWeight(food: Food, grams: int): void
+    + decreaseWeight(food: Food, grams: int): void
+    + getTotalCalories():double
+    + getTotalProtein():double
+    + getTotalCarbs():double
+    + getTotalFat():double
+    + getFoodItems() : Map<Food, Integer>
+    + toString():String
+    - enum NutrientType
+  }
+}
+package Controller{
+  class MainController{
+    - UserNameLogin:TextField 
+    - PwdLogin: TextField 
+    - LoginBtn: Button 
+    - UserAlert: Button 
+    - RegstBtn: Button 
+    - HomeAlert: Label
+    - DashboardAlert: Label
+    - userDataFile: File
+    - getUUID(userName: String ): String 
+    - validPassword(userName: String , password: String ): boolean 
+    - showLoginAlert(): void
+    - showAlert(title: String , UserNameMsg: String ): void
+    - jumpToHomePage(userName: String ): void
+    + handleToHome(): void
+    + handleToDashboard(): void
+    + handleToUser(): void
+    + handleBtnLogin(): void
+    + switchToSigninPage(): void
+  }
+  class DashboardController{
+    - HomeNav:Label
+    - DashboardNav: Label
+    - UserNav: Button
+    - detailNav1: Button 
+    - detailNav2: Button 
+    - detailNav3: Button 
+    - Carbo: Label
+    - Protein: Label
+    - Fat: Label
+    - goal: NutritionGoal
+    - showAlert(title: String , UserNameMsg: String ): void
+    - jumpToHomePage(userName: String ): void
+    + handleToDetail(): void
+    + handleToHome(): void
+    + handleToDashboard(): void
+    + handleToUser(): void
+  }
+  class UserController{
+    - HomeNav:Label
+    - DashboardNav: Label
+    - UserNav: Button
+    - userName: Label
+    - uuid: Label
+    - logOut: Button 
+    - toGoal: Button 
+    - toDash: Button 
+    - toPlan: Button 
+    - showAlert(title: String , UserNameMsg: String ): void
+    + handleToPlan(): void
+    + handleToHome(): void
+    + handleToDashboard(): void
+    + handleToUser(): void
+    + handleLogOut(): void
+  }
+  class PlanDetailController{
+    - HomeNav:Label
+    - DashboardNav: Label
+    - UserNav: Button
+    - back: Button
+    - showAlert(title: String , UserNameMsg: String ): void
+    + handleToHome(): void
+    + handleToDashboard(): void
+    + handleToUser(): void
+  }
+  class PlanController{
+    - HomeNav:Label
+    - DashboardNav: Label
+    - UserNav: Button
+    - goalLabel: Label
+    - mealTable:TableView<Food>
+    - nameColumn: TableColumn<Food, String>
+    - weightColumn: TableColumn<Food, Integer>
+    - summaryLabel: Label
+    - addFoodButton: Button
+    - backButton: Button
+    - mealPlan: MealPlan
+    - goal: NutritionGoal
+    - foodList: foodList
+    - showAlert(title: String , UserNameMsg: String ): void
+    - updateGoalLabel():void
+    + handleToHome(): void
+    + handleToDashboard(): void
+    + handleToUser(): void
+    + setNutritionGoal(goal: NutritionGoal):void
+    + getNutritionGoal():NutritionGoal
+    + setMealPlan(mealPlan: MealPlan):void
+    + updateMealPlanView():void
+    + handleAddFood():void
+    + handleBack():void
+    + updateMealPlanViewAfterAdd():void
+  }
+  class GoalController{
+    - HomeNav:Label
+    - DashboardNav: Label
+    - UserNav: Button
+    - FoodNav: Button
+    - currentWeightField:TextField
+    - goalWeightField: TextField
+    - dietDaysField: TextField
+    - showAlert(title: String , UserNameMsg: String ): void
+    - navigateTo(fxmlPath: String, title: String): void
+    + handleToHome(): void
+    + handleToDashboard(): void
+    + handleToUser(): void
+    + handleToFood(): void
+  }
+  class FoodlistController{
+    - foodTable:TableView<Food>
+    - nameColumn: TableColumn<Food, String>
+    - caloriesColumn: TableColumn<Food, Double>
+    - proteinColumn: TableColumn<Food, Double>
+    - carbsColumn: TableColumn<Food, Double>
+    - fatColumn: TableColumn<Food, Double>
+    - backButton: Button
+    - mealPlan: MealPlan
+    - planController: PlanController
+    - addFoodToMealPlan(food: Food): void
+    - handleBack():void
+    - showError(title: String, msg: String):void
+    - showInfo(title: String, msg: String):void
+    - handleSortByName():void
+    - handleSortByCalories():void
+    - handleSortByProtein():void
+    - handleSortByCarbs():void
+    - handleSortByFat():void
+    + setMealPlan(mealPlan: MealPlan): void
+    + setPlanController(planController: PlanController): void
+    
+  }
+  class RegisterController{
+    - userNameReg:TextField
+    - passwordReg: TextField
+    - RegstBtn: Button
+    - BackToSign: Label
+    - HomeAlert: Label
+    - DashboardAlert: Label 
+    - UserAlert: Button 
+    - users: List<User> {static}
+    - dataFile: File {static}
+    - showAlert(title: String , UserNameMsg: String ): void
+    - isUserExists(user: User ): boolean
+    - navigateToLoginPage(): void
+    - BackToLoginPage(event: MouseEvent): void
+    - saveUserToFile(user: User): boolean {static}
+    - showLoginAlert(): void
+    + handleToHome(): void
+    + handleToDashboard(): void
+    + handleToUser(): void
+  }
+}
+
+
+package Service{
+  class UndoManager{
+    - mpStatus : Stack<String>
+    - mpTarget: Stack<MealPlan>
+    - mealPlanList: ArrayList<MealPlan>
+    + saveActionMP(actionKey: String , mp: MealPlan ): void
+    + undoActionMP(): ArrayList<MealPlan> 
+  }
+  class Sorter {
+    - foodList: ArrayList<Food>
+    - sortBasedOnName(): void
+    - sortBasedOnFat(): void
+    - sortBasedOnCarbs(): void
+    - sortBasedOnProtein(): void
+    - sortBasedOnCalories(): void
+    - quickSort(arr: ArrayList<Food>, begin: int , end: int , type: String ):  void
+    - partition(arr: ArrayList<Food>, begin: int , end: int , type: String ):  int
+    + getSortedFoodList(): ArrayList<Food>
+  }
+  class RecommendationEngine{
+    - ng:NutritionGoal 
+    - foodList: ArrayList<Food>
+    - mealPlanList: ArrayList<MealPlan>
+    - combinationResult: ArrayList<MealPlan>
+    - generateMealPlan(): void
+    - generateFoodCombination(start: int  current: MealPlan ): void
+    + getMealPlan():ArrayList<MealPlan>
+  }
+}
+
+package Util{
+  class FileIO{
+    + loadFoodDatabase() : List<Food>{static}
+  }
+}
+Main -left-> User
+Main -right-> MainController
+
+MainController --> User
+MainController --> UserData
+MainController  --> DashboardController
+MainController  --> UserController
+
+DashboardController --> NutritionGoal
+DashboardController --> UserController
+DashboardController --> PlanDetailController
+
+UserController -left->GoalController
+UserController -left->DashboardController
+UserController -left->PlanController
+UserController -left->UserData
+
+RegisterController -->UserData
+RegisterController -->User
+RegisterController -->Main
+RegisterController -left->DashboardController
+
+PlanDetailController-left->DashboardController
+PlanDetailController-left->UserController
+
+PlanController -right-> Food
+PlanController --> MealPlan
+PlanController -left-> NutritionGoal
+PlanController -left-> GoalController
+PlanController -left-> FoodlistController
+
+FoodlistController --> PlanController
+FoodlistController --> FileIO
+FoodlistController --> Sorter
+FoodlistController --> MealPlan
+FoodlistController -right-> Food
+
+GoalController-->"*" MealPlan
+GoalController-left-> NutritionGoal
+GoalController-left-> FoodlistController
+
+MealPlan -down->Food
+MealPlan ..|> MealPlanBag
+
+UndoManager-->MealPlan
+Sorter -->"*" Food
+RecommendationEngine-left->"*" Food
+RecommendationEngine-left->"*" MealPlan
+RecommendationEngine-left-> NutritionGoal
+@enduml
