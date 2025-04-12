@@ -95,8 +95,8 @@ public class FoodlistController {
 
             PlanController controller = loader.getController();
             controller.setMealPlan(mealPlan);
-            controller.setNutritionGoal(planController.getNutritionGoal());  // ✅ 传回目标数据
-            controller.updateMealPlanView(); // ✅ 确保界面更新
+            controller.setNutritionGoal(planController.getNutritionGoal()); 
+            controller.updateMealPlanView();
 
             Stage stage = (Stage) backButton.getScene().getWindow();
             stage.setScene(new Scene(planPage));

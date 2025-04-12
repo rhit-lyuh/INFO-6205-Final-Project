@@ -1,0 +1,20 @@
+Environment Requirements:
+
+•Java 17+
+
+•JavaFX SDK
+
+•Eclipse IDE or IntelliJ IDEA (recommended)
+
+
+How to Run the Project:
+
+1.Clone the repository or import the project into your IDE.
+
+2.Install JavaFX SDK and configure it in your IDE:
+
+•In Eclipse: Add JavaFX library and set VM arguments.
+
+•In IntelliJ: Add JavaFX SDK in Project Structure.
+
+3.Run Main.java
