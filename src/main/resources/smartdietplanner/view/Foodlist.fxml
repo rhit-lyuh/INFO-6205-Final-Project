@@ -1,66 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <MenuBar layoutY="-8.0" minWidth="1000.0" prefHeight="22.0" prefWidth="600.0">
-         <menus>
-            <Menu mnemonicParsing="false" text="Home">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Close" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Dashboard">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Delete" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="User">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Close" />
-               </items>
-            </Menu>
-         </menus>
-         <padding>
-            <Insets top="5.0" />
-         </padding>
-      </MenuBar>
-      <ImageView fitHeight="97.0" fitWidth="402.0" layoutX="299.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../images/Logo-SDP.png" />
-         </image>
-      </ImageView>
-      <Text layoutX="293.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <TextField layoutX="365.0" layoutY="161.0" prefHeight="36.0" prefWidth="277.0" />
-      <Button layoutX="651.0" layoutY="160.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="73.0" text="🔍">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <ListView layoutX="152.0" layoutY="234.0" prefHeight="375.0" prefWidth="705.0" />
-      <Button layoutX="464.0" layoutY="626.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="73.0" text="Back">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-   </children>
-   <opaqueInsets>
-      <Insets />
-   </opaqueInsets>
+<AnchorPane minHeight="700.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdietplanner.controller.FoodlistController">
+
+    <children>
+        <ImageView fitHeight="97.0" fitWidth="402.0" layoutX="299.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="images/Logo-SDP.png" />
+            </image>
+        </ImageView>
+
+        <Label layoutX="432.0" layoutY="180.0" text="Browse Food List">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+
+        <TableView fx:id="foodTable" layoutX="152.0" layoutY="220.0" prefHeight="375.0" prefWidth="705.0">
+            <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="160.0" text="Name" />
+                <TableColumn fx:id="caloriesColumn" prefWidth="130.0" text="Calories" />
+                <TableColumn fx:id="proteinColumn" prefWidth="130.0" text="Protein (g)" />
+                <TableColumn fx:id="carbsColumn" prefWidth="130.0" text="Carbs (g)" />
+                <TableColumn fx:id="fatColumn" prefWidth="130.0" text="Fat (g)" />
+            </columns>
+        </TableView>
+
+        <Button fx:id="backButton" layoutX="440.0" layoutY="625.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="30.0" prefWidth="129.0" text="Back to Plan">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
+      <Button fx:id="sortByNameBtn" layoutX="881.0" layoutY="257.0" onAction="#handleSortByName" text="Sort by Name" />
+      <Button fx:id="sortByCaloriesBtn" layoutX="876.0" layoutY="326.0" onAction="#handleSortByCalories" text="Sort by Calories" />
+	  <Button fx:id="sortByProteinBtn" layoutX="878.0" layoutY="396.0" onAction="#handleSortByProtein" text="Sort by Protein" />
+	  <Button fx:id="sortByCarbsBtn" layoutX="882.0" layoutY="471.0" onAction="#handleSortByCarbs" text="Sort by Carbs" />
+	  <Button fx:id="sortByFatBtn" layoutX="890.0" layoutY="543.0" onAction="#handleSortByFat" text="Sort by Fat" />
+      
+    </children>
 </AnchorPane>

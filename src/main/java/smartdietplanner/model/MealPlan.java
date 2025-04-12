@@ -1,102 +1,103 @@
 package smartdietplanner.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-public class MealPlan {
+public class MealPlan implements MealPlanBag {
 
-    //A list of Food objects representing the meals in the meal plan.
-    private List<Food> meals;
-    private double totalCalories;
-    private double totalProtein;
-    private double totalCarbs;
-    private double totalFat;
+    private static MealPlan instance;
 
-    //Constructor
-    public MealPlan() {
-        this.meals = new ArrayList<>();
-        this.totalCalories = 0;
-        this.totalProtein = 0;
-        this.totalCarbs = 0;
-        this.totalFat = 0;
+    // Map<Food, weightInGrams>
+    private Map<Food, Integer> foodItems = new LinkedHashMap<>();
+
+    public static MealPlan getInstance() {
+        if (instance == null) {
+            instance = new MealPlan();
+        }
+        return instance;
     }
 
-    /**
-     * Adds a Food object to the meal plan and updates the total nutritional values.
-     *
-     * @param food the Food object to add
-     */
-    public void addFood(Food food) {
-    	this.meals.add(food);
-        this.totalCalories += Math.round( food.getCalories()*100)/100;
-        this.totalProtein += Math.round( food.getProtein()*100)/100;
-        this.totalCarbs += Math.round( food.getCarbs()*100)/100;
-        this.totalFat += Math.round( food.getFat()*100)/100;
+    @Override
+    public void addFood(Food food, int grams) {
+        if (food == null || grams <= 0) {
+            throw new IllegalArgumentException("Food cannot be null and weight must be positive.");
+        }
+        foodItems.put(food, grams);
     }
 
-    /**
-     * Removes a Food object from the meal plan and updates the total nutritional values.
-     *
-     * @param food the Food object to remove
-     */
+    @Override
     public void removeFood(Food food) {
-        if(this.meals.remove(food)) {
-        	this.totalCalories -=Math.round( food.getCalories()*100)/100;
-        	this.totalProtein -= Math.round( food.getProtein()*100)/100;
-        	this.totalCarbs -= Math.round( food.getCarbs()*100)/100;
-        	this.totalFat -= Math.round( food.getFat()*100)/100;
+        if (food == null) {
+            throw new IllegalArgumentException("Food cannot be null.");
+        }
+        foodItems.remove(food);
+    }
+
+    @Override
+    public void increaseWeight(Food food, int grams) {
+        if (food == null || grams <= 0) {
+            throw new IllegalArgumentException("Food cannot be null and weight must be positive.");
+        }
+        foodItems.put(food, foodItems.getOrDefault(food, 0) + grams);
+    }
+
+    @Override
+    public void decreaseWeight(Food food, int grams) {
+        if (food == null || grams <= 0) {
+            throw new IllegalArgumentException("Food cannot be null and weight must be positive.");
+        }
+        if (foodItems.containsKey(food)) {
+            int current = foodItems.get(food);
+            int updated = current - grams;
+            if (updated > 0) {
+                foodItems.put(food, updated);
+            } else {
+                foodItems.remove(food);
+            }
         }
     }
 
-    //Getter and Setter
-    public List<Food> getMeals() {
-        return this.meals;
-    }
-
-    public void setMeals(List<Food> meals) {
-        this.meals = meals;
-    }
-
+    @Override
     public double getTotalCalories() {
-        return  this.totalCalories;
+        return foodItems.entrySet().stream()
+            .mapToDouble(e -> e.getKey().getCalories() * e.getValue() / 100.0)
+            .sum();
     }
 
-    public void setTotalCalories(double totalCalories) {
-        this.totalCalories = totalCalories;
-    }
-
+    @Override
     public double getTotalProtein() {
-        return this.totalProtein;
+        return foodItems.entrySet().stream()
+            .mapToDouble(e -> e.getKey().getProtein() * e.getValue() / 100.0)
+            .sum();
     }
 
-    public void setTotalProtein(double totalProtein) {
-        this.totalProtein = totalProtein;
-    }
-
+    @Override
     public double getTotalCarbs() {
-        return this.totalCarbs;
+        return foodItems.entrySet().stream()
+            .mapToDouble(e -> e.getKey().getCarbs() * e.getValue() / 100.0)
+            .sum();
     }
 
-    public void setTotalCarbs(double totalCarbs) {
-        this.totalCarbs = totalCarbs;
-    }
-
+    @Override
     public double getTotalFat() {
-        return this.totalFat;
+        return foodItems.entrySet().stream()
+            .mapToDouble(e -> e.getKey().getFat() * e.getValue() / 100.0)
+            .sum();
     }
 
-    public void setTotalFat(double totalFat) {
-        this.totalFat = totalFat;
+    @Override
+    public Map<Food, Integer> getFoodItems() {
+        return new LinkedHashMap<>(foodItems);
     }
 
     @Override
     public String toString() {
-        return "MealPlan{" +
-                "meals=" + meals +
-                ", totalCalories=" + totalCalories +
-                ", totalProtein=" + totalProtein +
-                ", totalCarbs=" + totalCarbs +
-                ", totalFat=" + totalFat +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        foodItems.forEach((food, grams) -> {
+            sb.append(String.format("%s - %dg\n", food.getName(), grams));
+        });
+        sb.append(String.format("Calories: %.1f kcal, Protein: %.1f g, Carbs: %.1f g, Fat: %.1f g",
+                getTotalCalories(), getTotalProtein(), getTotalCarbs(), getTotalFat()));
+        return sb.toString();
     }
 }
