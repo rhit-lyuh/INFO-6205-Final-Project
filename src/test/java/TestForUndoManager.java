@@ -19,10 +19,10 @@ class TestForUndoManager {
 		Food foodB = new Food("B", 3.0, 0.5, 0.2, 5.3);
 		
 		MealPlan mp1 = new MealPlan();
-		mp1.addFood(foodA);
+		mp1.addFood(foodA,1);
 		
 		MealPlan mp2 = new MealPlan();
-		mp2.addFood(foodB);
+		mp2.addFood(foodB,1);
 		
 		mpList.add(mp1);
 		um.saveActionMP("ADD", mp1);
@@ -47,13 +47,13 @@ class TestForUndoManager {
 		Food foodC = new Food("C", 2.0, 0.7, 1.2, 4.3);
 		
 		MealPlan mp1 = new MealPlan();
-		mp1.addFood(foodA);
+		mp1.addFood(foodA,1);
 		
 		MealPlan mp2 = new MealPlan();
-		mp2.addFood(foodB);
+		mp2.addFood(foodB,1);
 		
 		MealPlan mp3 = new MealPlan();
-		mp3.addFood(foodC);
+		mp3.addFood(foodC,1);
 		
 		mpList.add(mp1);
 		um.saveActionMP("ADD", mp1);
@@ -84,13 +84,13 @@ class TestForUndoManager {
 		Food foodC = new Food("C", 2.0, 0.7, 1.2, 4.3);
 		
 		MealPlan mp1 = new MealPlan();
-		mp1.addFood(foodA);
+		mp1.addFood(foodA,1);
 		
 		MealPlan mp2 = new MealPlan();
-		mp2.addFood(foodB);
+		mp2.addFood(foodB,1);
 		
 		MealPlan mp3 = new MealPlan();
-		mp3.addFood(foodC);
+		mp3.addFood(foodC,1);
 		
 		mpList.add(mp1);
 		um.saveActionMP("ADD", mp1);
